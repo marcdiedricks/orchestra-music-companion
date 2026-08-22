@@ -98,5 +98,6 @@ window.MIXED_CHOIR_INDEX={
 "226":{title:"Blessed are they",sourcePage:389},
 "231":{title:"When courage you are needing",sourcePage:397},
 "234":{title:"Who shall separate us?",sourcePage:408},
-"239":{title:"O how shall I receive Thee?",sourcePage:415}
+"239":{title:"O how shall I receive Thee?",sourcePage:415},
+"247":{title:"O Zion, sweet home of the blest",sourcePage:432}
 };
