@@ -1,0 +1,1 @@
+window.ENGLISH_ORGANIST_INDEX={};
