@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reference Media | Orchestra Music Companion</title>
+  <style>body{font-family:system-ui,sans-serif;margin:0;background:#f6f7f8;color:#1f2937}main{max-width:760px;margin:auto;padding:20px}a{color:inherit}.card{background:white;border:1px solid #ddd;border-radius:12px;padding:16px;margin:12px 0}.muted{color:#667085}</style>
+</head>
+<body><main>
+  <p><a href="./index.html">← Orchestra Music Companion</a></p>
+  <h1>Reference Media</h1>
+  <p class="muted">Supplementary rehearsal audio and video. Existing music collections and PDFs are unchanged.</p>
+  <div id="status" class="card">Loading reference media…</div>
+</main>
+<script src="./reference-media.js"></script>
+<script>
+(async()=>{const el=document.getElementById('status');try{const c=await window.OrchestraReferenceMedia.getConfig();el.innerHTML='<strong>Reference media ready</strong><br><span class="muted">Media library: '+c.mediaBasePath+'</span>';}catch(e){el.textContent='Reference media is not available.';}})();
+</script></body></html>
