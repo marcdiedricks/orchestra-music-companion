@@ -14,15 +14,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Download reference media archive
+        run: |
+          curl -L --fail --retry 3 \
+            'https://drive.usercontent.google.com/download?id=1LmQFp381gNYvivpLKNp452XqpNQLiaD4&export=download&confirm=t' \
+            -o orchestra-reference-media-23.zip
+          unzip -t orchestra-reference-media-23.zip
+
       - name: Extract reference media
         run: |
+          rm -rf reference-media
           mkdir -p reference-media
           unzip -o orchestra-reference-media-23.zip -d reference-media
+          test "$(find reference-media -type f \( -iname '*.mp3' -o -iname '*.mp4' \) | wc -l)" -eq 23
 
       - name: Commit extracted reference media
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reference-media
-          git commit -m "BUILD 0.1B-02: extract online reference media" || exit 0
+          git commit -m "BUILD 0.1B-03: add reference media assets" || exit 0
           git push
