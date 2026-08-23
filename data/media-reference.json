@@ -1,8 +1,10 @@
 {
-  "version": "0.1B-02",
+  "version": "0.1B-04",
   "collection": "Additional Music",
-  "purpose": "Online-only reference media links for musical works",
+  "purpose": "Reference media for musical works",
   "offlineRequired": false,
-  "mediaStoredInApp": false,
+  "mediaStoredInApp": true,
+  "mediaBasePath": "reference-media/Durbies orchestra repertoire - Aug to Dec_26",
+  "mappingRule": "Match media to musical work only where the musical title is unambiguous. Preserve numbered repertoire folders until verified.",
   "items": []
 }
