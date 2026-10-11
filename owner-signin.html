@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Orchestra | Owner Sign-in Prototype</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#f8fafc;background:#050b16}*{box-sizing:border-box}
+body{margin:0;padding:24px;min-height:100vh;display:grid;place-items:center}
+main{width:min(100%,470px);background:#111b2d;border:1px solid #293c59;border-radius:24px;padding:28px}
+h1{font-size:1.7rem;margin:12px 0}p{color:#b8c7da;line-height:1.55}
+button{border:0;border-radius:12px;background:#f59e0b;color:#101827;font-weight:800;padding:15px;width:100%;font-size:1rem;margin:8px 0}
+button:disabled{opacity:.5}#status{padding:12px;background:#081323;border-radius:12px}
+small{color:#aebbd0}a{color:#7dd3fc}
+</style></head><body><main>
+<small>ORCHESTRA MUSIC COMPANION • DEVELOPMENT PROTOTYPE</small>
+<h1>Owner sign-in</h1>
+<p>Private account access only. The public music library is unchanged.</p>
+<p id="status" role="status" aria-live="polite">Preparing secure sign-in…</p>
+<button id="login" disabled>Sign in / Accept invitation</button>
+<button id="logout" hidden>Sign out</button>
+<p id="locked">Publishing is <strong>disabled</strong> in this prototype. No files can be uploaded or changed.</p>
+<p><a href="./index.html">← Return to Collections</a></p>
+</main>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+(function(){
+  const status=document.getElementById('status');
+  const login=document.getElementById('login');
+  const logout=document.getElementById('logout');
+  function render(user){
+    status.textContent=user?'Signed in. Owner publishing is not enabled yet.':'Not signed in.';
+    login.hidden=!!user;logout.hidden=!user;
+  }
+  if(!window.netlifyIdentity){
+    status.textContent='Sign-in library unavailable. Check internet access and try again.';
+    return;
+  }
+  const identity=window.netlifyIdentity;
+  identity.on('init',render);
+  identity.on('login',user=>{render(user);identity.close()});
+  identity.on('logout',()=>render(null));
+  identity.on('error',()=>{status.textContent='Authentication could not complete. No changes were made.'});
+  login.disabled=false;
+  login.addEventListener('click',()=>identity.open());
+  logout.addEventListener('click',()=>identity.logout());
+  identity.init();
+  // The legacy Identity widget recognizes Netlify invite/recovery hash tokens
+  // when a link is opened on a deployed site containing this page.
+})();
+</script></body></html>
